@@ -1,6 +1,11 @@
 import axios from 'axios';
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { useQuery } from 'react-query';
+
+const queryFunction = async(ip: string) => {
+    const {data} = await axios(`https://geo.ipify.org/api/v1?apiKey=at_vcFj91aYqjlJO4RqgoELADAXWivXZ&ipAddress=${ip}`)
+    return data
+}
 
 
 const Page: React.FC = () => {
@@ -8,15 +13,6 @@ const Page: React.FC = () => {
     const [ipstate, setipstate] = useState<string>('')
     const [IPStateSubmit, setIPStateSubmit] = useState<string>('8.8.8.8')
     const { data } = useQuery(['fetchIPData', IPStateSubmit], async() => await queryFunction(IPStateSubmit))
-
-    const queryFunction = async(ip: string) => {
-        const {data} = await axios(`https://geo.ipify.org/api/v1?apiKey=at_vcFj91aYqjlJO4RqgoELADAXWivXZ&ipAddress=${ip}`)
-        return data
-    }
-
-    useEffect(() => {
-        console.log(IPStateSubmit)
-    }, [IPStateSubmit])
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
