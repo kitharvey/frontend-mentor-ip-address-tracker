@@ -1,6 +1,25 @@
 import axios from 'axios';
 import React, {useState} from 'react'
 import { useQuery } from 'react-query';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+
+const Leaflet: React.FC<{location: [number, number]}> = ({location}) => {
+    return (
+        <>
+        <MapContainer center={location} zoom={13} scrollWheelZoom={false}>
+        <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={location}>
+            <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+        </Marker>
+        </MapContainer>
+        </>
+    );
+}
 
 const queryFunction = async(ip: string) => {
     const {data} = await axios(`https://geo.ipify.org/api/v1?apiKey=at_vcFj91aYqjlJO4RqgoELADAXWivXZ&ipAddress=${ip}`)
@@ -21,6 +40,8 @@ const Page: React.FC = () => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setipstate(event.target.value)
     }
+
+    console.log(data)
    
         return (
             <div>
@@ -35,6 +56,8 @@ const Page: React.FC = () => {
                 Timezone
                 UTC 
                 ISP
+
+                {data && <Leaflet location={[+data.location.lat, +data.location.lng]} />}
 
                 <div className="attribution">
                     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noreferrer">Frontend Mentor</a>. 
