@@ -14,7 +14,6 @@ interface MapComponentProps {
 
 
 const MapComponent: React.FC<MapComponentProps> = ({latitude, longitude, zoom}) => {
-    console.log({latitude, longitude, zoom})
     const MAPBOX_TOKEN = process.env.REACT_APP_MAP_KEY
     const [viewport, setViewport] = React.useState({
         latitude: latitude,
@@ -59,27 +58,39 @@ const Page: React.FC = () => {
         setipstate(event.target.value)
     }
 
-    console.log(data)
 
         return (
             <div className="wrapper" >
                 <div className="top" >
                     <h1>IP Address Tracker</h1>
-                    
-                    
                     <form onSubmit={handleSubmit} className="ip-form">
                         <input type="text" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" onChange={handleChange} placeholder='Search for any IP address or domain' className='ip-input' />
                         <button type='submit' className='submit-button' />
                     </form>
-                    <div>
-                    IP Address {data && data.ip}
-                    <br/>
-                    Location {data && data.location.city} {data && data.location.country} {data && data.location.postalCode}
-                    <br/>
-                    Timezone
-                    UTC {data && data.location.timezone}
-                    <br/>
-                    ISP {data && data.isp}
+                    <div className='ip-details-wrapper' >
+                        <div className='ip-details' >
+                        {data && (
+                            <>
+                            <div className='detail' >
+                                <h4>IP Address</h4>
+                                <p>{data.ip}</p>
+                            </div>
+                            <div className='detail' >
+                                <h4>Location</h4>
+                                <p>{`${data.location.city}, ${data.location.region}, ${data.location.country} ${data.location.postalCode}`}</p>
+                            </div>
+                            <div className='detail' >
+                                <h4>Timezone</h4>
+                                <p>UTC {data.location.timezone}</p>
+                            </div>
+                            <div className='detail' >
+                                <h4>ISP</h4>
+                                <p>{data.isp}</p>
+                            </div>
+                            </>
+                        )}
+                        </div>
+
                     </div>
 
 
