@@ -46,7 +46,7 @@ const Page: React.FC = () => {
 
     const [ipstate, setipstate] = useState<string>('')
     const [IPStateSubmit, setIPStateSubmit] = useState<string>('192.212.174.101')
-    const { data } = useQuery(['fetchIPData', IPStateSubmit], async() => await queryFunction(IPStateSubmit))
+    const { data, isFetching } = useQuery(['fetchIPData', IPStateSubmit], async() => await queryFunction(IPStateSubmit))
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -67,7 +67,7 @@ const Page: React.FC = () => {
                     </form>
                     <div className='ip-details-wrapper' >
                         <div className='ip-details' >
-                        {data && (
+                        {(data && !isFetching) ? (
                             <>
                             <div className='detail' >
                                 <h4>IP Address</h4>
@@ -86,7 +86,11 @@ const Page: React.FC = () => {
                                 <p>{data.isp}</p>
                             </div>
                             </>
-                        )}
+                        )
+
+                        : <div className="preloader"/>
+                    
+                    }
                         </div>
 
                     </div>
@@ -94,9 +98,9 @@ const Page: React.FC = () => {
 
 
                 </div>
-                {data && <div className='map-wrapper' > 
-                            <MapComponent latitude={data.location.lat} longitude={data.location.lng} zoom={13} /> 
-                        </div>}
+                <div className='map-wrapper' > 
+                    {(data && !isFetching) ? <MapComponent latitude={data.location.lat} longitude={data.location.lng} zoom={13} /> : <div className="preloader"/> }
+                </div>
                
                 <div className="bottom">
                     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noreferrer">Frontend Mentor</a>. 
