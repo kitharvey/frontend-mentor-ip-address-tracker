@@ -22,7 +22,7 @@
         }
 
         .ip-form{
-            width: 400px;
+            width: 500px;
             height: 50px;
             border-radius: 14px;
             overflow: hidden;
@@ -30,7 +30,7 @@
             .ip-input{
                 height: 50px;
                 width: 100%;
-                padding: 10px;
+                padding: 15px;
                 outline: none;
                 border: none;
                 font-family: inherit;
@@ -69,17 +69,15 @@
                 margin: auto;
                 min-width: 700px;
                 max-width: 1000px;
-                height: max-content;
-                min-height: 200px;
+                height: 175px;
                 background: #FFFFFF;
                 border-radius: 14px;
                 overflow: hidden;
                 box-shadow: 0 20px 50px 0 #00000020;
                 .detail{
                     width: 25%;
-                    min-height: 200px;
-                    height: max-content;
-                    padding: 30px;
+                    height: 100%;
+                    padding: 20px;
                     position: relative;
                     &::after {
                         content: '';
@@ -114,7 +112,7 @@
                     p{
                         word-wrap: normal;
                         font-size: 1.5rem;
-                        font-weight: 700;
+                        font-weight: 500;
                     }
 
                     
@@ -185,8 +183,9 @@
                     flex-direction: column;
                     min-width: 0;
                     width: 100%;
-                    
+                    height: max-content;
                     .detail{
+                        height: max-content;
                         min-height: 0;
                         width: 100%;
                         padding: 10px;
