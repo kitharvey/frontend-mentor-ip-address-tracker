@@ -25,7 +25,7 @@ const MapComponent: React.FC<MapComponentProps> = ({latitude, longitude, zoom}) 
                 {...viewport}
                 width="100%"
                 height="100%"
-                onViewportChange={(viewport: MapComponentProps) => setViewport(viewport)}
+                onViewportChange={(viewport: any) => setViewport(viewport)}
                 mapboxApiAccessToken={MAPBOX_TOKEN}
             >
                 <Marker latitude={latitude} longitude={longitude} offsetLeft={-23} offsetTop={-56}>
