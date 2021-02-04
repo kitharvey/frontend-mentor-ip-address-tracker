@@ -21,7 +21,6 @@ const MapComponent: React.FC<MapComponentProps> = ({latitude, longitude, zoom}) 
         zoom: zoom,
       });
     return (
-        <div style={{ height: '70vh', width: '100%' }}>
             <ReactMapGL
                 {...viewport}
                 width="100%"
@@ -33,7 +32,6 @@ const MapComponent: React.FC<MapComponentProps> = ({latitude, longitude, zoom}) 
                     <LocationMarker />
                 </Marker>
             </ReactMapGL>
-      </div>
     );
 }
 
@@ -96,7 +94,9 @@ const Page: React.FC = () => {
 
 
                 </div>
-                {data && <MapComponent latitude={data.location.lat} longitude={data.location.lng} zoom={13} />}
+                {data && <div className='map-wrapper' > 
+                            <MapComponent latitude={data.location.lat} longitude={data.location.lng} zoom={13} /> 
+                        </div>}
                
                 <div className="bottom">
                     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noreferrer">Frontend Mentor</a>. 
